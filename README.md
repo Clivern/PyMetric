@@ -1,4 +1,4 @@
-# PyMetric
+# PyuMetric
 A Python package to unify time series data sources.
 
 
