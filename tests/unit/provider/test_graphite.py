@@ -1,6 +1,6 @@
 import unittest
 
-from pymetric import Graphite_Provider
+from pyumetric import Graphite_Provider
 
 class TestGraphite(unittest.TestCase):
 

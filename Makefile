@@ -11,12 +11,12 @@ config:
 
 lint-pycodestyle:
 	@echo "\n==> Pycodestyle Linting:"
-	@find pymetric -type f -name \*.py | while read file; do echo "$$file" && pycodestyle --config=./pycodestyle --first "$$file" || exit 1; done
+	@find pyumetric -type f -name \*.py | while read file; do echo "$$file" && pycodestyle --config=./pycodestyle --first "$$file" || exit 1; done
 
 
 lint-flake8:
 	@echo "\n==> Flake8 Linting:"
-	@find pymetric -type f -name \*.py | while read file; do echo "$$file" && flake8 --config=flake8.ini "$$file" || exit 1; done
+	@find pyumetric -type f -name \*.py | while read file; do echo "$$file" && flake8 --config=flake8.ini "$$file" || exit 1; done
 
 
 lint: lint-pycodestyle lint-flake8
@@ -37,7 +37,7 @@ ci: test coverage lint
 	@echo "\n==> All quality checks passed"
 
 
-dist_build:
+build:
 	rm -rf build dist
 	$(PYTHON) setup.py sdist bdist_wheel
 
@@ -46,8 +46,15 @@ upload:
 	$(PYTHON) -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 
-test_install:
-	$(PYTHON) -m pip install --index-url https://test.pypi.org/simple/ pymetric
+release:
+	$(PYTHON) -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
+
+test_install:
+	$(PYTHON) -m pip install --index-url https://test.pypi.org/simple/ pyumetric
+
+
+install:
+	$(PYTHON) -m pip install pyumetric
 
 .PHONY: ci

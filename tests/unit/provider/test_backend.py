@@ -1,6 +1,6 @@
 import unittest
 
-from pymetric import Backend_Provider
+from pyumetric import Backend_Provider
 
 class TestBackend(unittest.TestCase):
 
