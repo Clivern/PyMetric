@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="pymetric",
     version="0.0.1",
-    author="Clivern",
+    author="gobadger",
     author_email="hello@clivern.com",
     description="A Python Package to unify time series data sources.",
     long_description=long_description,
