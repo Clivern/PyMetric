@@ -57,4 +57,9 @@ test_install:
 install:
 	$(PYTHON) -m pip install pyumetric
 
+
+develop:
+	$(PYTHON) setup.py develop
+
+
 .PHONY: ci
