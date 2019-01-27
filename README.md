@@ -1,9 +1,39 @@
-# PyuMetric
-A Python package to unify time series data sources.
+PyuMetric
+=========
 
+A Python Package to unify time series data sources.
 
-## Acknowledgements
+[![Build Status](https://travis-ci.org/gobadger/pyumetric.svg?branch=master)](https://travis-ci.org/gobadger/pyumetric)
+[![PyPI version](https://badge.fury.io/py/pyumetric.svg)](https://badge.fury.io/py/pyumetric)
 
-© 2019, GoBadger. Released under [MIT License](https://opensource.org/licenses/mit-license.php).
+Installation
+------------
+To install PyuMetric run this command:
+```
+pip3 install pyumetric
+```
 
-**PyMetric** is authored and maintained by [@gobadger](http://github.com/gobadger).
+Usage
+-----
+After installing the library, Read the following usage criteria:
+
+```python
+~
+```
+
+Misc
+====
+
+Changelog
+---------
+Version 1.0.0:
+```
+initial release
+```
+
+Acknowledgements
+----------------
+
+© 2019, GoBadger. Released under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
+
+**PyuMetric** is authored and maintained by [@gobadger](http://github.com/gobadger).
