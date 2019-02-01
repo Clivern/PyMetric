@@ -36,4 +36,4 @@ Acknowledgements
 
 © 2019, Silverback. Released under [MIT License](https://opensource.org/licenses/mit-license.php).
 
-**PyuMetric** is authored and maintained by [@gosilverback](http://github.com/gosilverback).
+**PyuMetric** is authored and maintained by [@silverbackhq](http://github.com/silverbackhq).
