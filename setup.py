@@ -11,7 +11,7 @@ setuptools.setup(
     description="A Python Package to unify time series data sources.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/gosilverback/pyumetric",
+    url="https://github.com/silverbackhq/pyumetric",
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
     install_requires=["requests"],
     classifiers=[
