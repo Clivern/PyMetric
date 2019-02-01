@@ -3,7 +3,7 @@ PyuMetric
 
 A Python Package to unify time series data sources.
 
-[![Build Status](https://travis-ci.org/gobadger/pyumetric.svg?branch=master)](https://travis-ci.org/gobadger/pyumetric)
+[![Build Status](https://travis-ci.org/silverbackhq/pyumetric.svg?branch=master)](https://travis-ci.org/silverbackhq/pyumetric)
 [![PyPI version](https://badge.fury.io/py/pyumetric.svg)](https://badge.fury.io/py/pyumetric)
 
 Installation
