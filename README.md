@@ -34,6 +34,6 @@ initial release
 Acknowledgements
 ----------------
 
-© 2019, GoBadger. Released under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
+© 2019, Silverback. Released under [MIT License](https://opensource.org/licenses/mit-license.php).
 
-**PyuMetric** is authored and maintained by [@gobadger](http://github.com/gobadger).
+**PyuMetric** is authored and maintained by [@gosilverback](http://github.com/gosilverback).
