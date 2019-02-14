@@ -18,7 +18,18 @@ Usage
 After installing the library, Read the following usage criteria:
 
 ```python
-~
+from pyumetric import NewRelic_Provider
+
+
+new_relic = NewRelic_Provider("api_key_here")
+# Get apps list
+new_relic.get_apps()
+# Get app info (12345 is the app id)
+new_relic.get_app(12345)
+# Get all metric list
+new_relic.get_metrics(12345)
+# Get Metrics list with a filter (Apdex)
+new_relic.get_metrics(12345, "Apdex")
 ```
 
 Misc
@@ -28,7 +39,7 @@ Changelog
 ---------
 Version 0.0.1:
 ```
-initial release
+Initial Release.
 ```
 
 Acknowledgements

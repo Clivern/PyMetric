@@ -3,8 +3,9 @@ NewRelic as Metric Provider
 """
 
 import requests
-from .exceptions import NewRelicApiException                   # noqa: F401 F403
-from .exceptions import NewRelicInvalidApiKeyException         # noqa: F401 F403
+from .exceptions import NewRelicApiException
+from .exceptions import NewRelicInvalidApiKeyException
+from .exceptions import NewRelicInvalidParameterException
 
 
 class NewRelic():
@@ -35,6 +36,10 @@ class NewRelic():
             raise NewRelicApiException(e)
 
     def get_app(self, app_id):
+
+        if app_id is None or app_id == "":
+            raise NewRelicInvalidParameterException("NewRelic application id is required!")
+
         try:
             request = requests.get(
                 self.__app_info_endpoint.format(url=self.__api_url, version=self.__api_version, app_id=app_id),
@@ -48,12 +53,20 @@ class NewRelic():
         except Exception as e:
             raise NewRelicApiException(e)
 
-    def get_metrics(self, app_id):
+    def get_metrics(self, app_id, metric_name=None):
+
+        if app_id is None or app_id == "":
+            raise NewRelicInvalidParameterException("NewRelic application id is required!")
+
+        data = ''
+        if metric_name is not None and metric_name.strip() != "":
+            data = "name=%s" % (metric_name)
+
         try:
             request = requests.get(
                 self.__metrics_list_endpoint.format(url=self.__api_url, version=self.__api_version, app_id=app_id),
                 headers=self.get_headers(),
-                data=''
+                data=data
             )
             if request.status_code == 200:
                 return request
@@ -62,7 +75,14 @@ class NewRelic():
         except Exception as e:
             raise NewRelicApiException(e)
 
-    def get_metric(self):
+    def get_metric(self, app_id, metric_name):
+
+        if app_id is None or app_id == "":
+            raise NewRelicInvalidParameterException("NewRelic application id is required!")
+
+        if metric_name is None or metric_name == "":
+            raise NewRelicInvalidParameterException("NewRelic metric name is required!")
+
         raise NotImplementedError("NewRelic get_metric method not implemented yet!")
 
     def get_headers(self):

@@ -4,6 +4,7 @@ import requests
 from pyumetric import NewRelic_Provider
 from pyumetric import NewRelicInvalidApiKeyException
 from pyumetric import NewRelicApiException
+from pyumetric import NewRelicInvalidParameterException
 from unittest.mock import patch
 
 
@@ -34,6 +35,7 @@ class TestNewRelic(unittest.TestCase):
         mock_get.return_value.status_code = 500
         nr = NewRelic_Provider("123")
         self.assertRaises(NewRelicApiException, lambda: nr.get_app(456))
+        self.assertRaises(NewRelicInvalidParameterException, lambda: nr.get_app(""))
 
     @patch('requests.get')
     def test_get_metrics(self, mock_get):
@@ -43,16 +45,26 @@ class TestNewRelic(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     @patch('requests.get')
+    def test_get_metrics_with_name(self, mock_get):
+        mock_get.return_value.status_code = 200
+        nr = NewRelic_Provider("123")
+        response = nr.get_metrics(456, "Apdex")
+        self.assertEqual(response.status_code, 200)
+
+    @patch('requests.get')
     def test_get_metrics_error(self, mock_get):
         mock_get.return_value.status_code = 500
         nr = NewRelic_Provider("123")
         self.assertRaises(NewRelicApiException, lambda: nr.get_metrics(456))
+        self.assertRaises(NewRelicInvalidParameterException, lambda: nr.get_metrics(""))
 
     @patch('requests.get')
     def test_get_metric_error(self, mock_get):
         mock_get.return_value.status_code = 500
         nr = NewRelic_Provider("123")
-        self.assertRaises(NotImplementedError, lambda: nr.get_metric())
+        self.assertRaises(NewRelicInvalidParameterException, lambda: nr.get_metric("", ""))
+        self.assertRaises(NewRelicInvalidParameterException, lambda: nr.get_metric(456, ""))
+        self.assertRaises(NotImplementedError, lambda: nr.get_metric(456, "Apdex"))
 
     def test_get_headers(self):
         nr = NewRelic_Provider("123")
