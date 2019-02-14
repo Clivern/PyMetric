@@ -3,11 +3,8 @@ NewRelic as Metric Provider
 """
 
 import requests
-from .exceptions import NewRelicApiRateLimitException          # noqa: F401 F403
 from .exceptions import NewRelicApiException                   # noqa: F401 F403
 from .exceptions import NewRelicInvalidApiKeyException         # noqa: F401 F403
-from .exceptions import NewRelicInvalidParameterException      # noqa: F401 F403
-from .exceptions import NewRelicUnknownApplicationException    # noqa: F401 F403
 
 
 class NewRelic():
@@ -27,11 +24,11 @@ class NewRelic():
         try:
             request = requests.get(
                 self.__apps_list_endpoint.format(url=self.__api_url, version=self.__api_version),
-                headers=self.__get_headers(),
+                headers=self.get_headers(),
                 data=''
             )
             if request.status_code == 200:
-                return request.json()
+                return request
             else:
                 raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
         except Exception as e:
@@ -41,11 +38,11 @@ class NewRelic():
         try:
             request = requests.get(
                 self.__app_info_endpoint.format(url=self.__api_url, version=self.__api_version, app_id=app_id),
-                headers=self.__get_headers(),
+                headers=self.get_headers(),
                 data=''
             )
             if request.status_code == 200:
-                return request.json()
+                return request
             else:
                 raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
         except Exception as e:
@@ -55,20 +52,20 @@ class NewRelic():
         try:
             request = requests.get(
                 self.__metrics_list_endpoint.format(url=self.__api_url, version=self.__api_version, app_id=app_id),
-                headers=self.__get_headers(),
+                headers=self.get_headers(),
                 data=''
             )
             if request.status_code == 200:
-                return request.json()
+                return request
             else:
                 raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
         except Exception as e:
             raise NewRelicApiException(e)
 
     def get_metric(self):
-        pass
+        raise NotImplementedError("NewRelic get_metric method not implemented yet!")
 
-    def __get_headers(self):
+    def get_headers(self):
         if self.api_key.strip() == "":
             raise NewRelicInvalidApiKeyException("NewRelic API Key is required!")
         return {
