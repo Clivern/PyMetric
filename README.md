@@ -1,7 +1,7 @@
 PyuMetric
 =========
 
-A Python Package to unify time series data sources.
+A Python Package to unify time series data sources and third party monitoring services.
 
 [![Build Status](https://travis-ci.org/silverbackhq/pyumetric.svg?branch=master)](https://travis-ci.org/silverbackhq/pyumetric)
 [![PyPI version](https://badge.fury.io/py/pyumetric.svg)](https://badge.fury.io/py/pyumetric)
