@@ -33,7 +33,7 @@ class NewRelic():
             else:
                 raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
         except Exception as e:
-            raise NewRelicApiException(e)
+            raise NewRelicApiException(str(e))
 
     def get_app(self, app_id):
 
@@ -51,16 +51,16 @@ class NewRelic():
             else:
                 raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
         except Exception as e:
-            raise NewRelicApiException(e)
+            raise NewRelicApiException(str(e))
 
-    def get_metrics(self, app_id, metric_name=None):
+    def get_metrics(self, app_id, name=None):
 
         if app_id is None or app_id == "":
             raise NewRelicInvalidParameterException("NewRelic application id is required!")
 
-        data = ''
-        if metric_name is not None and metric_name.strip() != "":
-            data = "name=%s" % (metric_name)
+        data = {}
+        if name is not None and name.strip() != "":
+            data["name"] = name
 
         try:
             request = requests.get(
@@ -73,17 +73,52 @@ class NewRelic():
             else:
                 raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
         except Exception as e:
-            raise NewRelicApiException(e)
+            raise NewRelicApiException(str(e))
 
-    def get_metric(self, app_id, metric_name):
+    def get_metric(self, app_id, names=[], values=[], start=None, end=None, summarize=False):
 
         if app_id is None or app_id == "":
             raise NewRelicInvalidParameterException("NewRelic application id is required!")
 
-        if metric_name is None or metric_name == "":
-            raise NewRelicInvalidParameterException("NewRelic metric name is required!")
+        if len(names) == 0:
+            raise NewRelicInvalidParameterException("NewRelic application metric name(s) is required!")
 
-        raise NotImplementedError("NewRelic get_metric method not implemented yet!")
+        if len(values) == 0:
+            raise NewRelicInvalidParameterException("NewRelic application metric value(s) is required!")
+
+        data = {}
+        data["names[]"] = []
+        data["values[]"] = []
+
+        for name in names:
+            data["names[]"].append(name)
+
+        for value in values:
+            data["values[]"].append(value)
+
+        if start is not None:
+            data["from"] = start
+
+        if end is not None:
+            data["to"] = end
+
+        if summarize:
+            data["summarize"] = "true"
+        else:
+            data["summarize"] = "false"
+
+        try:
+            request = requests.get(
+                self.__metric_info_endpoint.format(url=self.__api_url, version=self.__api_version, app_id=app_id),
+                headers=self.get_headers(),
+                data=data
+            )
+            if request.status_code == 200:
+                return request
+            else:
+                raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
+        except Exception as e:
+            raise NewRelicApiException(str(e))
 
     def get_headers(self):
         if self.api_key.strip() == "":

@@ -30,6 +30,8 @@ new_relic.get_app(12345)
 new_relic.get_metrics(12345)
 # Get Metrics list with a filter (Apdex)
 new_relic.get_metrics(12345, "Apdex")
+# Get Metric Values from 2019-02-01T01:00:00+00:00 to 2019-02-14T11:03:20+00:00
+new_relic.get_metric(244202213, ["WebTransaction"], ["average_response_time"], "2019-02-01T01:00:00+00:00", "2019-02-14T11:03:20+00:00", False)
 ```
 
 Misc

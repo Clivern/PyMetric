@@ -59,12 +59,20 @@ class TestNewRelic(unittest.TestCase):
         self.assertRaises(NewRelicInvalidParameterException, lambda: nr.get_metrics(""))
 
     @patch('requests.get')
+    def test_get_metric_with_name_value(self, mock_get):
+        mock_get.return_value.status_code = 200
+        nr = NewRelic_Provider("123")
+        response = nr.get_metric(456, ["WebTransaction"], ["average_response_time"], "2019-02-01T01:00:00+00:00", "2019-02-14T11:03:20+00:00", True)
+        self.assertEqual(response.status_code, 200)
+
+    @patch('requests.get')
     def test_get_metric_error(self, mock_get):
         mock_get.return_value.status_code = 500
         nr = NewRelic_Provider("123")
-        self.assertRaises(NewRelicInvalidParameterException, lambda: nr.get_metric("", ""))
-        self.assertRaises(NewRelicInvalidParameterException, lambda: nr.get_metric(456, ""))
-        self.assertRaises(NotImplementedError, lambda: nr.get_metric(456, "Apdex"))
+        self.assertRaises(NewRelicInvalidParameterException, lambda: nr.get_metric("", ["WebTransaction"], ["average_response_time"]))
+        self.assertRaises(NewRelicInvalidParameterException, lambda: nr.get_metric(456, [], ["average_response_time"]))
+        self.assertRaises(NewRelicInvalidParameterException, lambda: nr.get_metric(456, ["WebTransaction"], []))
+        self.assertRaises(NewRelicApiException, lambda: nr.get_metric(456, ["WebTransaction"], ["average_response_time"]))
 
     def test_get_headers(self):
         nr = NewRelic_Provider("123")
