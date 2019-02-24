@@ -13,12 +13,3 @@ install:
 # command to run tests
 script:
   - make ci
-
-deploy:
-  provider: pypi
-  user: clivern
-  password: $PYPI_ENCRYPTED_PASS
-  on:
-    tags: true
-    python: "3.6"
-    condition: $TRAVIS_OS_NAME = linux
