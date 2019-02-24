@@ -18,20 +18,33 @@ Usage
 After installing the library, Read the following usage criteria:
 
 ```python
+from pyumetric import Datetime_Utils
 from pyumetric import NewRelic_Provider
 
 
 new_relic = NewRelic_Provider("api_key_here")
+
 # Get apps list
 new_relic.get_apps()
+
 # Get app info (12345 is the app id)
 new_relic.get_app(12345)
+
 # Get all metric list
 new_relic.get_metrics(12345)
+
 # Get Metrics list with a filter (Apdex)
 new_relic.get_metrics(12345, "Apdex")
-# Get Metric Values from 2019-02-01T01:00:00+00:00 to 2019-02-14T11:03:20+00:00
-new_relic.get_metric(244202213, ["WebTransaction"], ["average_response_time"], "2019-02-01T01:00:00+00:00", "2019-02-14T11:03:20+00:00", False)
+
+# Get Metric Values from 14 days till now
+new_relic.get_metric(
+    244202213,
+    ["WebTransaction"],
+    ["average_response_time"],
+    Datetime_Utils("UTC", -14).iso(),
+    Datetime_Utils("UTC").iso(),
+    False
+)
 ```
 
 Misc
@@ -39,6 +52,11 @@ Misc
 
 Changelog
 ---------
+Version 0.0.3:
+```
+Add Datetime Util Module.
+```
+
 Version 0.0.2:
 ```
 Initial Release.

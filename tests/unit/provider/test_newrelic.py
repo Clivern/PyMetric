@@ -24,6 +24,18 @@ class TestNewRelic(unittest.TestCase):
         self.assertRaises(NewRelicApiException, lambda: nr.get_apps())
 
     @patch('requests.get')
+    def test_ping(self, mock_get):
+        mock_get.return_value.status_code = 200
+        nr = NewRelic_Provider("123")
+        self.assertEqual(True, nr.ping())
+
+    @patch('requests.get')
+    def test_ping_error(self, mock_get):
+        mock_get.return_value.status_code = 500
+        nr = NewRelic_Provider("123")
+        self.assertEqual(False, nr.ping())
+
+    @patch('requests.get')
     def test_get_app(self, mock_get):
         mock_get.return_value.status_code = 200
         nr = NewRelic_Provider("123")

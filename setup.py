@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyumetric",
-    version="0.0.2",
+    version="0.0.3",
     author="silverback",
     author_email="hello@clivern.com",
     description="A Python Package to unify time series data sources and third party monitoring services.",
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/silverbackhq/pyumetric",
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
-    install_requires=["requests"],
+    install_requires=["requests", "pytz"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

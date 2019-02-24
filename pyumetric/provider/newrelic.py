@@ -21,6 +21,20 @@ class NewRelic():
     def __init__(self, api_key):
         self.api_key = api_key
 
+    def ping(self):
+        try:
+            request = requests.get(
+                self.__apps_list_endpoint.format(url=self.__api_url, version=self.__api_version),
+                headers=self.get_headers(),
+                data=''
+            )
+            if request.status_code == 200:
+                return True
+            else:
+                return False
+        except Exception:
+            return False
+
     def get_apps(self):
         try:
             request = requests.get(
