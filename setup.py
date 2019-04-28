@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyumetric",
-    version="0.0.3",
+    version="0.0.4",
     author="silverback",
     author_email="hello@clivern.com",
     description="A Python Package to unify time series data sources and third party monitoring services.",

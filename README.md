@@ -52,6 +52,13 @@ Misc
 
 Changelog
 ---------
+Version 0.0.4:
+```
+Update Response.
+Fix Exceptions.
+Fix Text Cases.
+```
+
 Version 0.0.3:
 ```
 Add Datetime Util Module.
