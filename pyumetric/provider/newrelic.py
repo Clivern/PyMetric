@@ -31,9 +31,9 @@ class NewRelic():
             if request.status_code == 200:
                 return True
             else:
-                return False
+                raise NewRelicApiException("Error, Invalid status code %d response %s" % (request.status_code, request.text))
         except Exception:
-            return False
+            raise NewRelicApiException("Request Failure: status code %d response %s" % (request.status_code, request.text))
 
     def get_apps(self):
         try:
@@ -43,11 +43,11 @@ class NewRelic():
                 data=''
             )
             if request.status_code == 200:
-                return request
+                return request.text
             else:
-                raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
-        except Exception as e:
-            raise NewRelicApiException(str(e))
+                raise NewRelicApiException("Error, Invalid status code %d response %s" % (request.status_code, request.text))
+        except Exception:
+            raise NewRelicApiException("Request Failure: status code %d response %s" % (request.status_code, request.text))
 
     def get_app(self, app_id):
 
@@ -61,11 +61,11 @@ class NewRelic():
                 data=''
             )
             if request.status_code == 200:
-                return request
+                return request.text
             else:
-                raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
-        except Exception as e:
-            raise NewRelicApiException(str(e))
+                raise NewRelicApiException("Error, Invalid status code %d response %s" % (request.status_code, request.text))
+        except Exception:
+            raise NewRelicApiException("Request Failure: status code %d response %s" % (request.status_code, request.text))
 
     def get_metrics(self, app_id, name=None):
 
@@ -83,11 +83,11 @@ class NewRelic():
                 data=data
             )
             if request.status_code == 200:
-                return request
+                return request.text
             else:
-                raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
-        except Exception as e:
-            raise NewRelicApiException(str(e))
+                raise NewRelicApiException("Error, Invalid status code %d response %s" % (request.status_code, request.text))
+        except Exception:
+            raise NewRelicApiException("Request Failure: status code %d response %s" % (request.status_code, request.text))
 
     def get_metric(self, app_id, names=[], values=[], start=None, end=None, summarize=False):
 
@@ -128,11 +128,11 @@ class NewRelic():
                 data=data
             )
             if request.status_code == 200:
-                return request
+                return request.text
             else:
-                raise NewRelicApiException("Error, Invalid status code %d" % (request.status_code))
-        except Exception as e:
-            raise NewRelicApiException(str(e))
+                raise NewRelicApiException("Error, Invalid status code %d response %s" % (request.status_code, request.text))
+        except Exception:
+            raise NewRelicApiException("Request Failure: status code %d response %s" % (request.status_code, request.text))
 
     def get_headers(self):
         if self.api_key.strip() == "":
