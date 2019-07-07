@@ -30,7 +30,7 @@ test:
 
 
 coverage:
-	$(COVERAGE) run --source='.' setup.py test
+	$(COVERAGE) run --source=pyumetric setup.py test
 	$(COVERAGE) report -m
 
 
