@@ -5,6 +5,7 @@ A Python Package to unify time series data sources and third party monitoring se
 
 [![Build Status](https://travis-ci.org/silverbackhq/pyumetric.svg?branch=master)](https://travis-ci.org/silverbackhq/pyumetric)
 [![PyPI version](https://badge.fury.io/py/pyumetric.svg)](https://badge.fury.io/py/pyumetric)
+[![Coverage Status](https://coveralls.io/repos/github/silverbackhq/pyumetric/badge.svg?branch=master)](https://coveralls.io/github/silverbackhq/pyumetric?branch=master)
 
 Installation
 ------------
